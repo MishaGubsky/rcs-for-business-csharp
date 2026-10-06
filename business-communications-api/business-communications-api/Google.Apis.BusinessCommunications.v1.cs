@@ -46,6 +46,60 @@
 namespace Google.Apis.BusinessCommunications.v1.Data
 {    
 
+    /// <summary>An attachment resource with a unique name that an agent can use to identify the attachment.</summary>
+    public class GoogleCommunicationsBusinesscommunicationsV1Attachment : Google.Apis.Requests.IDirectResponseSchema
+    {
+        /// <summary>Output only. The unique identifier of the attachment.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("name")]
+        public virtual string Name { get; set; }
+
+        /// <summary>Optional. Display name of the attachment.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("displayName")]
+        public virtual string DisplayName { get; set; }
+
+        /// <summary>Optional. Text description of the attachment's content.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("description")]
+        public virtual string Description { get; set; }
+
+        /// <summary>Output only. The time when the attachment was uploaded.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("createTime")]
+        public virtual string CreateTime { get; set; }
+
+        /// <summary>Output only. The GCS URL of the attachment.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("gcsUrl")]
+        public virtual string GcsUrl { get; set; }
+
+        /// <summary>Optional. The content type of the attachment.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("contentType")]
+        public virtual string ContentType { get; set; }
+
+        /// <summary>Output only. Size in bytes of the attachment.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("sizeBytes")]
+        public virtual System.Nullable<long> SizeBytes { get; set; }
+
+        /// <summary>Required. The source that triggered the attachment upload.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("attachmentOperationSource")]
+        public virtual string AttachmentOperationSource { get; set; }
+
+        /// <summary>Output only. Error result, if any, that occurred during the attachment upload.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("uploadError")]
+        public virtual Status UploadError { get; set; }
+
+        /// <summary>The ETag of the item.</summary>
+        public virtual string ETag { get; set; }
+    }
+
+    /// <summary>Request for creating an attachment.</summary>
+    public class GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest : Google.Apis.Requests.IDirectResponseSchema
+    {
+        /// <summary>Required. The source that triggered the attachment upload.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("attachmentOperationSource")]
+        public virtual string AttachmentOperationSource { get; set; }
+
+        /// <summary>The ETag of the item.</summary>
+        public virtual string ETag { get; set; }
+    }
+
     /// <summary>A conversational entity that represents a brand.</summary>
     public class Agent : Google.Apis.Requests.IDirectResponseSchema
     {
@@ -53,7 +107,7 @@ namespace Google.Apis.BusinessCommunications.v1.Data
         [Newtonsoft.Json.JsonPropertyAttribute("brandName")]
         public virtual string BrandName { get; set; } 
 
-        /// <summary>Required. The name that the agent displays to users. Maximum 40 characters. Not modifiable after
+        /// <summary>Required. The name that the agent displays to users. Maximum 100 characters. Not modifiable after
         /// agent verification.</summary>
         [Newtonsoft.Json.JsonPropertyAttribute("displayName")]
         public virtual string DisplayName { get; set; } 
@@ -99,7 +153,7 @@ namespace Google.Apis.BusinessCommunications.v1.Data
         [Newtonsoft.Json.JsonPropertyAttribute("countryCode")]
         public virtual string CountryCode { get; set; } 
 
-        /// <summary>Required. The name that the agent displays to users. Maximum 40 characters. Not modifiable after
+        /// <summary>Required. The name that the agent displays to users. Maximum 100 characters. Not modifiable after
         /// agent verification.</summary>
         [Newtonsoft.Json.JsonPropertyAttribute("displayName")]
         public virtual string DisplayName { get; set; } 
@@ -543,6 +597,17 @@ namespace Google.Apis.BusinessCommunications.v1.Data
         public virtual string ETag { get; set; }
     }    
 
+    /// <summary>A list of all Google provided template questions.</summary>
+    public class ListSurveyQuestionsResponse : Google.Apis.Requests.IDirectResponseSchema
+    {
+        /// <summary>List of Google provided template survey question information.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("surveyQuestions")]
+        public virtual System.Collections.Generic.IList<SurveyQuestion> SurveyQuestions { get; set; } 
+
+        /// <summary>The ETag of the item.</summary>
+        public virtual string ETag { get; set; }
+    }    
+
     /// <summary>Response for ListTesters.</summary>
     public class ListTestersResponse : Google.Apis.Requests.IDirectResponseSchema
     {
@@ -738,7 +803,7 @@ namespace Google.Apis.BusinessCommunications.v1.Data
 
         /// <summary>Required. Description of the agent that is visible to users. Maximum 100 characters. See [Edit
         /// agent information](https://developers.google.com/business-communications/rcs-business-
-        /// messaging/guides/build/agents/edit-agent-information#edit_your_agents_information) for detailed
+        /// messaging/guides/build/agents/edit-agent-information?hl=en#edit_your_agents_information) for detailed
         /// requirements.</summary>
         [Newtonsoft.Json.JsonPropertyAttribute("description")]
         public virtual string Description { get; set; } 
@@ -868,6 +933,10 @@ namespace Google.Apis.BusinessCommunications.v1.Data
     /// <summary>Details about RCS for Business agent launch for each region.</summary>
     public class RcsBusinessMessagingRegionLaunch : Google.Apis.Requests.IDirectResponseSchema
     {
+        /// <summary>Optional. Specifies the party designation of the agent launch.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("agentLaunchPartyDesignation")]
+        public virtual string AgentLaunchPartyDesignation { get; set; } 
+
         /// <summary>Comment from the carrier.</summary>
         [Newtonsoft.Json.JsonPropertyAttribute("comment")]
         public virtual string Comment { get; set; } 
@@ -958,6 +1027,45 @@ namespace Google.Apis.BusinessCommunications.v1.Data
         public virtual string ETag { get; set; }
     }    
 
+    /// <summary>The detailed content of each survey question.</summary>
+    public class SurveyQuestion : Google.Apis.Requests.IDirectResponseSchema
+    {
+        /// <summary>Required. The unique identifier of the question.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("name")]
+        public virtual string Name { get; set; } 
+
+        /// <summary>Required. Question content. Limited to 200 characters for custom questions.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("questionContent")]
+        public virtual string QuestionContent { get; set; } 
+
+        /// <summary>Output only. Type of the question.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("questionType")]
+        public virtual string QuestionType { get; set; } 
+
+        /// <summary>Required. List of responses displayed with the question. Maximum 12.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("responseOptions")]
+        public virtual System.Collections.Generic.IList<SurveyResponse> ResponseOptions { get; set; } 
+
+        /// <summary>The ETag of the item.</summary>
+        public virtual string ETag { get; set; }
+    }    
+
+    /// <summary>The content for a survey question response.</summary>
+    public class SurveyResponse : Google.Apis.Requests.IDirectResponseSchema
+    {
+        /// <summary>Required. Text that is shown in the survey and sent back to the agent when the user taps it.
+        /// Maximum 35 characters.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("content")]
+        public virtual string Content { get; set; } 
+
+        /// <summary>The string the agent receives when the user taps the question response.</summary>
+        [Newtonsoft.Json.JsonPropertyAttribute("postbackData")]
+        public virtual string PostbackData { get; set; } 
+
+        /// <summary>The ETag of the item.</summary>
+        public virtual string ETag { get; set; }
+    }    
+
     /// <summary>A tester for the agent. The agent can interact with verified testers even if the agent has not yet
     /// launched.</summary>
     public class Tester : Google.Apis.Requests.IDirectResponseSchema
@@ -986,7 +1094,7 @@ namespace Google.Apis.BusinessCommunications.v1.Data
     /// <summary>A web-based resource associated with the agent.</summary>
     public class WebEntry : Google.Apis.Requests.IDirectResponseSchema
     {
-        /// <summary>Optional. Required for websites, optional otherwise. Label for the URI.</summary>
+        /// <summary>Required. Label for the URI.</summary>
         [Newtonsoft.Json.JsonPropertyAttribute("label")]
         public virtual string Label { get; set; } 
 
@@ -1027,7 +1135,9 @@ namespace Google.Apis.BusinessCommunications.v1
             partners = new PartnersResource(this);
             regions = new RegionsResource(this);
             subscriberProfiles = new SubscriberProfilesResource(this);
+            surveyQuestions = new SurveyQuestionsResource(this);
             testers = new TestersResource(this);
+            v1 = new V1Resource(this);
         }
 
         /// <summary>Gets the service supported features.</summary>
@@ -1106,12 +1216,28 @@ namespace Google.Apis.BusinessCommunications.v1
             get { return subscriberProfiles; }
         }
 
+        private readonly SurveyQuestionsResource surveyQuestions;
+
+        /// <summary>Gets the SurveyQuestions resource.</summary>
+        public virtual SurveyQuestionsResource SurveyQuestions
+        {
+            get { return surveyQuestions; }
+        }
+
         private readonly TestersResource testers;
 
         /// <summary>Gets the Testers resource.</summary>
         public virtual TestersResource Testers
         {
             get { return testers; }
+        }
+
+        private readonly V1Resource v1;
+
+        /// <summary>Gets the V1 resource.</summary>
+        public virtual V1Resource V1
+        {
+            get { return v1; }
         }
     }
 
@@ -1461,8 +1587,215 @@ namespace Google.Apis.BusinessCommunications.v1
             public AgentsResource(Google.Apis.Services.IClientService service)
             {
                 this.service = service;
+                attachments = new AttachmentsResource(service);
                 integrations = new IntegrationsResource(service);
 
+            }
+
+            private readonly AttachmentsResource attachments;
+
+            /// <summary>Gets the Attachments resource.</summary>
+            public virtual AttachmentsResource Attachments
+            {
+                get { return attachments; }
+            }
+
+            /// <summary>The "attachments" collection of methods.</summary>
+            public class AttachmentsResource
+            {
+                private const string Resource = "attachments";
+
+                /// <summary>The service which this resource belongs to.</summary>
+                private readonly Google.Apis.Services.IClientService service;
+
+                /// <summary>Constructs a new resource.</summary>
+                public AttachmentsResource(Google.Apis.Services.IClientService service)
+                {
+                    this.service = service;
+                }
+
+                /// <summary>Creates an attachment for an RCS for Business agent.</summary>
+                /// <param name="body">The body of the request.</param>
+                /// <param name="parent">Required. The unique identifier of the agent. If the brand identifier is "1234" and the agent
+                /// identifier is "5678", this parameter resolves to "brands/1234/agents/5678".</param>
+                public virtual CreateRequest Create(Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest body, string parent)
+                {
+                    return new CreateRequest(service, body, parent);
+                }
+
+                /// <summary>Creates an attachment for an RCS for Business agent. (Media upload)</summary>
+                /// <param name="body">The body of the request.</param>
+                /// <param name="parent">Required. The unique identifier of the agent. If the brand identifier is "1234" and the agent
+                /// identifier is "5678", this parameter resolves to "brands/1234/agents/5678".</param>
+                /// <param name="stream">The stream to upload.</param>
+                /// <param name="contentType">The content type of the stream to upload.</param>
+                public virtual CreateMediaUpload Create(Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest body, string parent, System.IO.Stream stream, string contentType)
+                {
+                    return new CreateMediaUpload(service, body, parent, stream, contentType);
+                }
+
+                /// <summary>Creates an attachment request.</summary>
+                public class CreateRequest : BusinessCommunicationsBaseServiceRequest<Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1Attachment>
+                {
+                    /// <summary>Constructs a new Create request.</summary>
+                    public CreateRequest(Google.Apis.Services.IClientService service, Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest body, string parent)
+                        : base(service)
+                    {
+                        Parent = parent;
+                        Body = body;
+                        InitParameters();
+                    }
+
+                    /// <summary>Required. The unique identifier of the agent. If the brand identifier is "1234" and the agent
+                    /// identifier is "5678", this parameter resolves to "brands/1234/agents/5678".</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("parent", Google.Apis.Util.RequestParameterType.Path)]
+                    public virtual string Parent { get; private set; }
+
+                    /// <summary>Required if `uploadType=media`. Specifies the reason for the upload.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("attachmentOperationSource", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string AttachmentOperationSource { get; set; }
+
+                    /// <summary>Gets or sets the body of this request.</summary>
+                    Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest Body { get; set; }
+
+                    ///<summary>Returns the body of the request.</summary>
+                    protected override object GetBody() { return Body; }
+
+                    ///<summary>Gets the method name.</summary>
+                    public override string MethodName
+                    {
+                        get { return "create"; }
+                    }
+
+                    ///<summary>Gets the HTTP method.</summary>
+                    public override string HttpMethod
+                    {
+                        get { return "POST"; }
+                    }
+
+                    ///<summary>Gets the REST path.</summary>
+                    public override string RestPath
+                    {
+                        get { return "v1/{+parent}/attachments"; }
+                    }
+
+                    /// <summary>Initializes Create parameter list.</summary>
+                    protected override void InitParameters()
+                    {
+                        base.InitParameters();
+
+                        RequestParameters.Add(
+                            "parent", new Google.Apis.Discovery.Parameter
+                            {
+                                Name = "parent",
+                                IsRequired = true,
+                                ParameterType = "path",
+                                DefaultValue = null,
+                                Pattern = @"^brands/[^/]+/agents/[^/]+$",
+                            });
+                        RequestParameters.Add(
+                            "attachmentOperationSource", new Google.Apis.Discovery.Parameter
+                            {
+                                Name = "attachmentOperationSource",
+                                IsRequired = false,
+                                ParameterType = "query",
+                                DefaultValue = null,
+                                Pattern = null,
+                            });
+                    }
+                }
+
+                /// <summary>Create media upload which supports resumable upload.</summary>
+                public class CreateMediaUpload : Google.Apis.Upload.ResumableUpload<Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest, Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1Attachment>
+                {
+                    /// <summary>V1 error format.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("$.xgafv", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual System.Nullable<XgafvEnum> Xgafv { get; set; }
+
+                    /// <summary>V1 error format.</summary>
+                    public enum XgafvEnum
+                    {
+                        /// <summary>v1 error format</summary>
+                        [Google.Apis.Util.StringValueAttribute("1")]
+                        Value1,
+                        /// <summary>v2 error format</summary>
+                        [Google.Apis.Util.StringValueAttribute("2")]
+                        Value2,
+                    }
+
+                    /// <summary>OAuth access token.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("access_token", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string AccessToken { get; set; }
+
+                    /// <summary>Data format for response.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("alt", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual System.Nullable<AltEnum> Alt { get; set; }
+
+                    /// <summary>Data format for response.</summary>
+                    public enum AltEnum
+                    {
+                        /// <summary>Responses with Content-Type of application/json</summary>
+                        [Google.Apis.Util.StringValueAttribute("json")]
+                        Json,
+                        /// <summary>Media download with context-dependent Content-Type</summary>
+                        [Google.Apis.Util.StringValueAttribute("media")]
+                        Media,
+                        /// <summary>Responses with Content-Type of application/x-protobuf</summary>
+                        [Google.Apis.Util.StringValueAttribute("proto")]
+                        Proto,
+                    }
+
+                    /// <summary>JSONP</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("callback", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string Callback { get; set; }
+
+                    /// <summary>Selector specifying which fields to include in a partial response.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("fields", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string Fields { get; set; }
+
+                    /// <summary>API key. Your API key identifies your project and provides you with API access, quota, and
+                    /// reports. Required unless you provide an OAuth 2.0 token.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("key", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string Key { get; set; }
+
+                    /// <summary>OAuth 2.0 token for the current user.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("oauth_token", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string OauthToken { get; set; }
+
+                    /// <summary>Returns response with indentations and line breaks.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("prettyPrint", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual System.Nullable<bool> PrettyPrint { get; set; }
+
+                    /// <summary>Available to use for quota purposes for server-side applications. Can be any arbitrary string
+                    /// assigned to a user, but should not exceed 40 characters.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("quotaUser", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string QuotaUser { get; set; }
+
+                    /// <summary>Legacy upload protocol for media (e.g. "media", "multipart").</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("uploadType", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string UploadType { get; set; }
+
+                    /// <summary>Upload protocol for media (e.g. "raw", "multipart").</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("upload_protocol", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string UploadProtocol { get; set; }
+
+                    /// <summary>Required. The unique identifier of the agent. If the brand identifier is "1234" and the agent
+                    /// identifier is "5678", this parameter resolves to "brands/1234/agents/5678".</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("parent", Google.Apis.Util.RequestParameterType.Path)]
+                    public virtual string Parent { get; private set; }
+
+                    /// <summary>Required if `uploadType=media`. Specifies the reason for the upload.</summary>
+                    [Google.Apis.Util.RequestParameterAttribute("attachmentOperationSource", Google.Apis.Util.RequestParameterType.Query)]
+                    public virtual string AttachmentOperationSource { get; set; }
+
+                    /// <summary>Constructs a new Create media upload instance.</summary>
+                    public CreateMediaUpload(Google.Apis.Services.IClientService service, Google.Apis.BusinessCommunications.v1.Data.GoogleCommunicationsBusinesscommunicationsV1CreateAttachmentRequest body, string parent, System.IO.Stream stream, string contentType)
+                        : base(service, string.Format("/{0}/{1}v1/{2}/attachments", "upload", service.BasePath, parent), "POST", stream, contentType)
+                    {
+                        Parent = parent;
+                        Body = body;
+                    }
+                }
             }
 
             private readonly IntegrationsResource integrations;
@@ -2192,8 +2525,7 @@ namespace Google.Apis.BusinessCommunications.v1
             /// <summary>Lists all the agents associated with a brand. *Note*: This method always sets `pageSize` to
             /// `0`.</summary>
             /// <param name="parent">Required. The unique identifier of the brand. If the brand identifier is "1234", this parameter
-            /// resolves to "brands/1234". The brand identifier must be "-" to return all agents for an RCS for Business
-            /// carrier.</param>
+            /// resolves to "brands/1234". The brand identifier must be "-" to return all agents for an RBM carrier.</param>
             public virtual ListRequest List(string parent)
             {
                 return new ListRequest(service, parent);
@@ -2214,7 +2546,7 @@ namespace Google.Apis.BusinessCommunications.v1
 
                 /// <summary>Required. The unique identifier of the brand. If the brand identifier is "1234", this
                 /// parameter resolves to "brands/1234". The brand identifier must be "-" to return all agents for an
-                /// RCS for Business carrier.</summary>
+                /// RBM carrier.</summary>
                 [Google.Apis.Util.RequestParameterAttribute("parent", Google.Apis.Util.RequestParameterType.Path)]
                 public virtual string Parent { get; private set; }
 
@@ -2255,12 +2587,12 @@ namespace Google.Apis.BusinessCommunications.v1
                     /// <summary>Launch is suspended.</summary>
                     [Google.Apis.Util.StringValueAttribute("LAUNCH_STATE_SUSPENDED")]
                     LAUNCHSTATESUSPENDED,
-                    /// <summary>Deprecated: This state is no longer used. Unlaunch in review.</summary>
+                    /// <summary>Unlaunch in review.</summary>
                     [Google.Apis.Util.StringValueAttribute("LAUNCH_STATE_PENDING_UNLAUNCH")]
                     LAUNCHSTATEPENDINGUNLAUNCH,
-                    /// <summary>Deprecated: This state is no longer used. Launch is invalid because the associated
-                    /// Google My Business Listing doesn't support messaging. Reverifying in Google My Business
-                    /// automatically relaunches here. Only applicable for locations.</summary>
+                    /// <summary>Launch is invalid because the associated Google My Business Listing doesn't support
+                    /// messaging. Reverifying in Google My Business automatically relaunches here. Only applicable for
+                    /// locations.</summary>
                     [Google.Apis.Util.StringValueAttribute("LAUNCH_STATE_INVALID_IN_GMB")]
                     LAUNCHSTATEINVALIDINGMB,
                 }
@@ -2609,6 +2941,10 @@ namespace Google.Apis.BusinessCommunications.v1
                 [Google.Apis.Util.RequestParameterAttribute("updateMask", Google.Apis.Util.RequestParameterType.Query)]
                 public virtual object UpdateMask { get; set; }
 
+                /// <summary>Optional. The party acting on behalf of the carrier.</summary>
+                [Google.Apis.Util.RequestParameterAttribute("acting_party", Google.Apis.Util.RequestParameterType.Query)]
+                public virtual string ActingParty { get; set; }
+
 
                 /// <summary>Gets or sets the body of this request.</summary>
                 Google.Apis.BusinessCommunications.v1.Data.AgentLaunch Body { get; set; }
@@ -2652,6 +2988,15 @@ namespace Google.Apis.BusinessCommunications.v1
                         "updateMask", new Google.Apis.Discovery.Parameter
                         {
                             Name = "updateMask",
+                            IsRequired = false,
+                            ParameterType = "query",
+                            DefaultValue = null,
+                            Pattern = null,
+                        });
+                    RequestParameters.Add(
+                        "acting_party", new Google.Apis.Discovery.Parameter
+                        {
+                            Name = "acting_party",
                             IsRequired = false,
                             ParameterType = "query",
                             DefaultValue = null,
@@ -2828,6 +3173,11 @@ namespace Google.Apis.BusinessCommunications.v1
             [Google.Apis.Util.RequestParameterAttribute("name", Google.Apis.Util.RequestParameterType.Path)]
             public virtual string Name { get; private set; }
 
+            /// <summary>For non-RBM cases: if true, any agents and locations associated with this brand are also
+            /// deleted.</summary>
+            [Google.Apis.Util.RequestParameterAttribute("force", Google.Apis.Util.RequestParameterType.Query)]
+            public virtual System.Nullable<bool> Force { get; set; }
+
 
             ///<summary>Gets the method name.</summary>
             public override string MethodName
@@ -2860,6 +3210,15 @@ namespace Google.Apis.BusinessCommunications.v1
                         ParameterType = "path",
                         DefaultValue = null,
                         Pattern = @"^brands/[^/]+$",
+                    });
+                RequestParameters.Add(
+                    "force", new Google.Apis.Discovery.Parameter
+                    {
+                        Name = "force",
+                        IsRequired = false,
+                        ParameterType = "query",
+                        DefaultValue = null,
+                        Pattern = null,
                     });
             }
 
@@ -3895,6 +4254,84 @@ namespace Google.Apis.BusinessCommunications.v1
         }
     }
 
+    /// <summary>The "surveyQuestions" collection of methods.</summary>
+    public class SurveyQuestionsResource
+    {
+        private const string Resource = "surveyQuestions";
+
+        /// <summary>The service which this resource belongs to.</summary>
+        private readonly Google.Apis.Services.IClientService service;
+
+        /// <summary>Constructs a new resource.</summary>
+        public SurveyQuestionsResource(Google.Apis.Services.IClientService service)
+        {
+            this.service = service;
+
+        }
+
+
+        /// <summary>Lists all Google predefined survey questions. *Note*: This method always sets `pageSize` to
+        /// `0`.</summary>
+        public virtual ListRequest List()
+        {
+            return new ListRequest(service);
+        }
+
+        /// <summary>Lists all Google predefined survey questions. *Note*: This method always sets `pageSize` to
+        /// `0`.</summary>
+        public class ListRequest : BusinessCommunicationsBaseServiceRequest<Google.Apis.BusinessCommunications.v1.Data.ListSurveyQuestionsResponse>
+        {
+            /// <summary>Constructs a new List request.</summary>
+            public ListRequest(Google.Apis.Services.IClientService service)
+                : base(service)
+            {
+                InitParameters();
+            }
+
+
+            /// <summary>Optional. List Google template questions by locale. Locale is represented by a well-formed IETF
+            /// BCP 47 language tag. Default is EN.</summary>
+            [Google.Apis.Util.RequestParameterAttribute("locale", Google.Apis.Util.RequestParameterType.Query)]
+            public virtual string Locale { get; set; }
+
+
+            ///<summary>Gets the method name.</summary>
+            public override string MethodName
+            {
+                get { return "list"; }
+            }
+
+            ///<summary>Gets the HTTP method.</summary>
+            public override string HttpMethod
+            {
+                get { return "GET"; }
+            }
+
+            ///<summary>Gets the REST path.</summary>
+            public override string RestPath
+            {
+                get { return "v1/surveyQuestions"; }
+            }
+
+            /// <summary>Initializes List parameter list.</summary>
+            protected override void InitParameters()
+            {
+                base.InitParameters();
+
+                RequestParameters.Add(
+                    "locale", new Google.Apis.Discovery.Parameter
+                    {
+                        Name = "locale",
+                        IsRequired = false,
+                        ParameterType = "query",
+                        DefaultValue = null,
+                        Pattern = null,
+                    });
+            }
+
+        }
+    }
+
     /// <summary>The "testers" collection of methods.</summary>
     public class TestersResource
     {
@@ -3910,69 +4347,6 @@ namespace Google.Apis.BusinessCommunications.v1
 
         }
 
-
-        /// <summary>Sends an invite to a phone number to be added as a tester. The invited user must be RCS-enabled and
-        /// reachable by the RCS for Business platform. When an agent invites a user to become a tester, an RCS for
-        /// Business platform management agent sends a message to the user asking for confirmation that she wants to be
-        /// a tester of the agent. Once the user confirms, she becomes a tester. An agent can send 20 tester requests
-        /// each day with a total maximum of 200 tester requests. If you send tester requests above those limits, the
-        /// RCS for Business platform returns a `429 RESOURCE_EXHAUSTED` response.</summary>
-        /// <param name="body">The body of the request.</param>
-        public virtual CreateRequest Create(Google.Apis.BusinessCommunications.v1.Data.Tester body)
-        {
-            return new CreateRequest(service, body);
-        }
-
-        /// <summary>Sends an invite to a phone number to be added as a tester. The invited user must be RCS-enabled and
-        /// reachable by the RCS for Business platform. When an agent invites a user to become a tester, an RCS for
-        /// Business platform management agent sends a message to the user asking for confirmation that she wants to be
-        /// a tester of the agent. Once the user confirms, she becomes a tester. An agent can send 20 tester requests
-        /// each day with a total maximum of 200 tester requests. If you send tester requests above those limits, the
-        /// RCS for Business platform returns a `429 RESOURCE_EXHAUSTED` response.</summary>
-        public class CreateRequest : BusinessCommunicationsBaseServiceRequest<Google.Apis.BusinessCommunications.v1.Data.Tester>
-        {
-            /// <summary>Constructs a new Create request.</summary>
-            public CreateRequest(Google.Apis.Services.IClientService service, Google.Apis.BusinessCommunications.v1.Data.Tester body)
-                : base(service)
-            {
-                Body = body;
-                InitParameters();
-            }
-
-
-
-            /// <summary>Gets or sets the body of this request.</summary>
-            Google.Apis.BusinessCommunications.v1.Data.Tester Body { get; set; }
-
-            ///<summary>Returns the body of the request.</summary>
-            protected override object GetBody() { return Body; }
-
-            ///<summary>Gets the method name.</summary>
-            public override string MethodName
-            {
-                get { return "create"; }
-            }
-
-            ///<summary>Gets the HTTP method.</summary>
-            public override string HttpMethod
-            {
-                get { return "POST"; }
-            }
-
-            ///<summary>Gets the REST path.</summary>
-            public override string RestPath
-            {
-                get { return "v1/testers"; }
-            }
-
-            /// <summary>Initializes Create parameter list.</summary>
-            protected override void InitParameters()
-            {
-                base.InitParameters();
-
-            }
-
-        }
 
         /// <summary>Deletes a tester device.</summary>
         /// <param name="name">Required. The unique identifier of the tester. If tester phone number is "+1112223333", this
@@ -4178,6 +4552,86 @@ namespace Google.Apis.BusinessCommunications.v1
                         DefaultValue = null,
                         Pattern = null,
                     });
+            }
+
+        }
+    }
+
+    /// <summary>The "v1" collection of methods.</summary>
+    public class V1Resource
+    {
+        private const string Resource = "v1";
+
+        /// <summary>The service which this resource belongs to.</summary>
+        private readonly Google.Apis.Services.IClientService service;
+
+        /// <summary>Constructs a new resource.</summary>
+        public V1Resource(Google.Apis.Services.IClientService service)
+        {
+            this.service = service;
+
+        }
+
+
+        /// <summary>Sends an invite to a phone number to be added as a tester. The invited user must be RCS-enabled and
+        /// reachable by the RBM platform. When an agent invites a user to become a tester, an RBM platform management
+        /// agent sends a message to the user asking for confirmation that she wants to be a tester of the agent. Once
+        /// the user confirms, she becomes a tester. An agent can send 20 tester requests each day with a total maximum
+        /// of 200 tester requests. If you send tester requests above those limits, the RBM platform returns a `429
+        /// RESOURCE_EXHAUSTED` response.</summary>
+        /// <param name="body">The body of the request.</param>
+        public virtual TestersRequest Testers(Google.Apis.BusinessCommunications.v1.Data.Tester body)
+        {
+            return new TestersRequest(service, body);
+        }
+
+        /// <summary>Sends an invite to a phone number to be added as a tester. The invited user must be RCS-enabled and
+        /// reachable by the RBM platform. When an agent invites a user to become a tester, an RBM platform management
+        /// agent sends a message to the user asking for confirmation that she wants to be a tester of the agent. Once
+        /// the user confirms, she becomes a tester. An agent can send 20 tester requests each day with a total maximum
+        /// of 200 tester requests. If you send tester requests above those limits, the RBM platform returns a `429
+        /// RESOURCE_EXHAUSTED` response.</summary>
+        public class TestersRequest : BusinessCommunicationsBaseServiceRequest<Google.Apis.BusinessCommunications.v1.Data.Tester>
+        {
+            /// <summary>Constructs a new Testers request.</summary>
+            public TestersRequest(Google.Apis.Services.IClientService service, Google.Apis.BusinessCommunications.v1.Data.Tester body)
+                : base(service)
+            {
+                Body = body;
+                InitParameters();
+            }
+
+
+
+            /// <summary>Gets or sets the body of this request.</summary>
+            Google.Apis.BusinessCommunications.v1.Data.Tester Body { get; set; }
+
+            ///<summary>Returns the body of the request.</summary>
+            protected override object GetBody() { return Body; }
+
+            ///<summary>Gets the method name.</summary>
+            public override string MethodName
+            {
+                get { return "testers"; }
+            }
+
+            ///<summary>Gets the HTTP method.</summary>
+            public override string HttpMethod
+            {
+                get { return "POST"; }
+            }
+
+            ///<summary>Gets the REST path.</summary>
+            public override string RestPath
+            {
+                get { return "v1/testers"; }
+            }
+
+            /// <summary>Initializes Testers parameter list.</summary>
+            protected override void InitParameters()
+            {
+                base.InitParameters();
+
             }
 
         }

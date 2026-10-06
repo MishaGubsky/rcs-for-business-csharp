@@ -87,6 +87,25 @@ namespace com.google.rbm.samples
                 }
                 return;
             }
+            if (flags.ContainsKey("upload_verification_document")) {
+                string agentId = flags["agent_id"];
+                string pdfPath = flags["pdf_path"];
+                string source = flags.ContainsKey("attachment_source") ? flags["attachment_source"] : "VERIFICATION_PAGE";
+
+                if (string.IsNullOrEmpty(pdfPath)) {
+                    Console.WriteLine("Error: pdf_path parameter is required");
+                    return;
+                }
+
+                Console.WriteLine("Uploading verification document from path: " + pdfPath);
+                GoogleCommunicationsBusinesscommunicationsV1Attachment attachment = api.UploadVerificationDocument(agentId, pdfPath, source);
+                Console.WriteLine("Upload success! Created attachment details:");
+                Console.WriteLine("Name: " + attachment.Name);
+                Console.WriteLine("GcsUrl: " + attachment.GcsUrl);
+                Console.WriteLine("ContentType: " + attachment.ContentType);
+                Console.WriteLine("SizeBytes: " + attachment.SizeBytes);
+                return;
+            }
         }
 
         static void Main(string[] args) {

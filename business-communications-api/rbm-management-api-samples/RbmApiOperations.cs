@@ -67,7 +67,7 @@ namespace com.google.rbm.samples
             Tester res = null;
 
             try {
-                res = businessCommunicationsService.Testers.Create(t).Execute();
+                res = businessCommunicationsService.V1.Testers(t).Execute();
             }
             catch (Exception e)
             {
@@ -129,6 +129,31 @@ namespace com.google.rbm.samples
             }
 
             return res;
+        }
+
+        public GoogleCommunicationsBusinesscommunicationsV1Attachment UploadVerificationDocument(
+            string agentId, string pdfPath, string source) {
+            
+            if (!File.Exists(pdfPath)) {
+                throw new FileNotFoundException("PDF file not found at: " + pdfPath);
+            }
+
+            var httpClient = businessCommunicationsService.HttpClient;
+            var requestUri = $"https://businesscommunications.googleapis.com/upload/v1/{agentId}/attachments?uploadType=media&attachmentOperationSource={source}";
+
+            using (var fileStream = new FileStream(pdfPath, FileMode.Open, FileAccess.Read))
+            using (var content = new System.Net.Http.StreamContent(fileStream))
+            {
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                var response = httpClient.PostAsync(requestUri, content).Result;
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                
+                if (!response.IsSuccessStatusCode) {
+                    throw new Exception($"Upload failed with status {response.StatusCode}: {responseBody}");
+                }
+
+                return businessCommunicationsService.Serializer.Deserialize<GoogleCommunicationsBusinesscommunicationsV1Attachment>(responseBody);
+            }
         }
     }
 }

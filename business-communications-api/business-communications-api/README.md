@@ -27,6 +27,13 @@ We aim to publish builds to nuget.org shortly.
 
 ## Change log
 
+1.0.7
+
+-   Regenerated stubs to include attachments.create endpoint for verification document upload.
+-   Added acting_party query parameter to updateLaunch.
+-   Added SuggestionDisplay parameter in RCS C# stubs and samples.
+-   Updated C# management flow samples to support document upload.
+
 1.0.6
 
 -   Regenerated to include Business Communications API definitions as of Jan
